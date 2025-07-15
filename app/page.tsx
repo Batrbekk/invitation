@@ -91,7 +91,7 @@ export default function Home() {
     <main className="bg-[#f9f9f9] overflow-x-hidden">
       <div className="h-dvh relative" onClick={handleMusic}>
         <audio ref={audioRef} src="/alem.mp3" preload="auto" />
-        <Image src="/images/hero.png" alt="background" fill className="object-cover" />
+        <Image src="/images/hero.png" alt="background" fill className="object-cover" priority />
         <button
           className="absolute left-[72%] top-[54%] z-20 bg-transparent p-2 rounded-full hover:bg-white/20 transition"
           aria-label={playing ? "Остановить музыку" : "Включить музыку"}

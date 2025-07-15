@@ -10,6 +10,7 @@ const FinalBlock: React.FC = () => (
         src="/images/hall.png"
         alt="background"
         fill
+        priority
         className="w-full h-full object-cover blur-xs"
       />
     </div>
