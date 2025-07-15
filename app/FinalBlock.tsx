@@ -4,7 +4,7 @@ import FadeInOnScroll from "./FadeInOnScroll";
 
 const FinalBlock: React.FC = () => (
   <div className="relative w-full py-20 flex items-center justify-center mt-10">
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 bg-black">
       <div className="w-full h-full" />
       <Image
         src="/images/hall.png"
