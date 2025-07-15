@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import CalendarBlock from "./CalendarBlock";
 import CountdownBlock from "./CountdownBlock";
 import SurveyForm from "./SurveyForm";
@@ -11,21 +11,82 @@ export default function Home() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
 
+  // Добавляем обработчики событий аудио
+  const handleAudioLoad = () => {
+    console.log('Audio loaded successfully');
+  };
+
+  const handleAudioError = (error: any) => {
+    console.error('Audio error:', error);
+  };
+
+  const handleAudioPlay = () => {
+    console.log('Audio play event fired');
+    setPlaying(true);
+  };
+
+  const handleAudioPause = () => {
+    console.log('Audio pause event fired');
+    setPlaying(false);
+  };
+
+  // Инициализация аудио при загрузке компонента
+  useEffect(() => {
+    console.log('Component mounted, audioRef.current:', audioRef.current);
+    
+    if (audioRef.current) {
+      // Проверяем готовность аудио
+      audioRef.current.addEventListener('canplaythrough', () => {
+        console.log('Audio can play through');
+      });
+      
+      audioRef.current.addEventListener('loadeddata', () => {
+        console.log('Audio data loaded');
+      });
+      
+      audioRef.current.addEventListener('error', (e) => {
+        console.error('Audio error event:', e);
+      });
+    }
+  }, []);
+
   const handleMusic = () => {
-    if (!audioRef.current) return;
+    console.log('handleMusic called, audioRef.current:', audioRef.current);
+    if (!audioRef.current) {
+      console.error('Audio element not found');
+      return;
+    }
+    
     if (playing) {
+      console.log('Pausing audio');
       audioRef.current.pause();
       setPlaying(false);
     } else {
-      audioRef.current.play();
-      setPlaying(true);
+      console.log('Playing audio');
+      audioRef.current.play()
+        .then(() => {
+          console.log('Audio started successfully');
+          setPlaying(true);
+        })
+        .catch((error) => {
+          console.error('Error playing audio:', error);
+          setPlaying(false);
+        });
     }
   };
 
   return (
     <main className="bg-[#f9f9f9] overflow-x-hidden">
       <div className="h-dvh relative">
-        <audio ref={audioRef} src="/alem.mp3" preload="auto" />
+        <audio 
+          ref={audioRef} 
+          src="/alem.mp3" 
+          preload="auto"
+          onLoad={handleAudioLoad}
+          onError={handleAudioError}
+          onPlay={handleAudioPlay}
+          onPause={handleAudioPause}
+        />
         <Image src="/images/hero.png" alt="background" fill className="object-cover" />
         <button
           onClick={handleMusic}
