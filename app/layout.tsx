@@ -9,8 +9,8 @@ const lobster = Lobster({
 });
 
 export const metadata: Metadata = {
-  title: "Batyrbek & Guzel weeding invitation",
-  description: "Batyrbek & Guzel weeding invitation",
+  title: "Батырбек & Гузель тойға шақыру!",
+  description: "Батырбек & Гузель тойға шақыру!",
 };
 
 export default function RootLayout({
