@@ -1,10 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const HEART_PATH =
   "M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572";
 
 export default function Preloader() {
+  const [drawComplete, setDrawComplete] = useState(false);
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#f9f9f9]">
       <motion.svg
@@ -23,7 +25,26 @@ export default function Preloader() {
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
+          onAnimationComplete={() => setDrawComplete(true)}
         />
+        {drawComplete && (
+          <motion.path
+            d={HEART_PATH}
+            fill="none"
+            stroke="#ef4444"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            initial={false}
+            animate={{ scale: [1, 1.15, 1] }}
+            transition={{
+              repeat: Infinity,
+              duration: 0.8,
+              ease: "easeInOut"
+            }}
+            style={{ originX: 0.5, originY: 0.55 }}
+          />
+        )}
       </motion.svg>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
