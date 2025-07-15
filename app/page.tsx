@@ -133,6 +133,7 @@ export default function Home() {
           </span>
         </button>
         <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-end pb-10">
+          <h1 className="text-5xl font-bold mb-6 text-center w-full text-white font-snell">Тойға шақыру!</h1>
           <h1 className="text-4xl font-bold text-white font-snell">Батырбек & Гузель</h1>
           <p className="text-white text-4xl font-snell mt-2">17.10.2025</p>
           <Image
