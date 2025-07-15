@@ -6,10 +6,75 @@ import CalendarBlock from "./CalendarBlock";
 import CountdownBlock from "./CountdownBlock";
 import SurveyForm from "./SurveyForm";
 import FinalBlock from "./FinalBlock";
+import Preloader from "./Preloader";
+import React from "react";
+import FadeInOnScroll from "./FadeInOnScroll";
+
+const HALL_IMAGE_SRC = "/images/hall.png";
 
 export default function Home() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Блокировка скролла
+  React.useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [loading]);
+
+  React.useEffect(() => {
+    // Собираем все изображения на странице
+    const images = Array.from(document.images);
+    const srcs = images.map(img => img.currentSrc || img.src);
+    const needHall = !srcs.some(src => src.includes(HALL_IMAGE_SRC));
+    let hallImg: HTMLImageElement | null = null;
+    const total = images.length + (needHall ? 1 : 0);
+    if (total === 0) {
+      setLoading(false);
+      return;
+    }
+    let loaded = 0;
+    function check() {
+      loaded++;
+      if (loaded >= total) setLoading(false);
+    }
+    images.forEach(img => {
+      if (img.complete) {
+        check();
+      } else {
+        img.addEventListener('load', check);
+        img.addEventListener('error', check);
+      }
+    });
+    if (needHall) {
+      hallImg = new window.Image();
+      hallImg.src = HALL_IMAGE_SRC;
+      if (hallImg.complete) {
+        check();
+      } else {
+        hallImg.addEventListener('load', check);
+        hallImg.addEventListener('error', check);
+      }
+    }
+    // fallback на случай зависших картинок
+    const timeout = setTimeout(() => setLoading(false), 4000);
+    return () => {
+      clearTimeout(timeout);
+      if (hallImg) {
+        hallImg.onload = null;
+        hallImg.onerror = null;
+      }
+    };
+  }, []);
+
+  if (loading) return <Preloader />;
 
   const handleMusic = () => {
     if (!audioRef.current) return;
@@ -82,41 +147,47 @@ export default function Home() {
         </div>
       </div>
       <div className="py-14">
-        <div className="px-4 flex flex-col items-center justify-center">
-          <h1 className="text-3xl text-black font-snell">
-            Құрметті қонақтар!
-          </h1>
-          <p className="text-black mt-6 text-center font-snell">
-            Сіздерді Батырбек ұлымыз бен Гузель келіңіміздің тойына арналған салтанатты ақ дастархандарымыздың қадірлі қонағы болуға шақырамыз!
-          </p>
-        </div>
-        <div className="relative w-[110%] h-[90px] -ml-5 mt-6">
-          <Image src="/line-heart.webp" alt="invitation" fill className="object-cover" />
-        </div>
+        <FadeInOnScroll y={30}>
+          <div className="px-4 flex flex-col items-center justify-center">
+            <h1 className="text-3xl text-black font-snell">
+              Құрметті қонақтар!
+            </h1>
+            <p className="text-black mt-6 text-center font-snell">
+              Сіздерді Батырбек ұлымыз бен Гузель келіңіміздің тойына арналған салтанатты ақ дастархандарымыздың қадірлі қонағы болуға шақырамыз!
+            </p>
+          </div>
+        </FadeInOnScroll>
+        <FadeInOnScroll y={30} delay={0.2}>
+          <div className="relative w-[110%] h-[90px] -ml-5 mt-6">
+            <Image src="/line-heart.webp" alt="invitation" fill className="object-cover" />
+          </div>
+        </FadeInOnScroll>
       </div>
       <CalendarBlock />
-      <div className="py-14 flex flex-col items-center w-full">
-        <div className="flex flex-col items-center gap-2 mt-8">
-          <h3 className="text-3xl font-snell text-black">Мекенжайы:</h3>
-          <p className="text-2xl font-snell text-black text-center">
-            Павлодар қ. <br /> Иса Байзақов көшесi 186 көшесі
-          </p>
-          <p className="text-2xl font-snell text-black">
-            <a href="https://maps.app.goo.gl/Nz3r49dVLfoFa5ct8" target="_blank" rel="noopener noreferrer">
-              <span className="underline">Ресторан &ldquo;Марсель&ldquo;</span>
-            </a>
-          </p>
-        </div>
-        <div className="w-full max-w-4xl mt-4" style={{ aspectRatio: '4/3' }}>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2441.2469002885055!2d76.95856081401674!3d52.27521943535626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42f9cb2ca8c0402b%3A0x5b7c16358febc8d9!2z0JzQsNGA0YHQtdC70Yw!5e0!3m2!1sru!2skz!4v1752548950159!5m2!1sru!2skz"
-              style={{ width: '100%', height: '100%', border: 0 }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            ></iframe>
+      <FadeInOnScroll y={30}>
+        <div className="py-14 flex flex-col items-center w-full">
+          <div className="flex flex-col items-center gap-2 mt-8">
+            <h3 className="text-3xl font-snell text-black">Мекенжайы:</h3>
+            <p className="text-2xl font-snell text-black text-center">
+              Павлодар қ. <br /> Иса Байзақов көшесi 186 көшесі
+            </p>
+            <p className="text-2xl font-snell text-black">
+              <a href="https://maps.app.goo.gl/Nz3r49dVLfoFa5ct8" target="_blank" rel="noopener noreferrer">
+                <span className="underline">Ресторан &ldquo;Марсель&ldquo;</span>
+              </a>
+            </p>
           </div>
-      </div>
+          <div className="w-full max-w-4xl mt-4" style={{ aspectRatio: '4/3' }}>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2441.2469002885055!2d76.95856081401674!3d52.27521943535626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42f9cb2ca8c0402b%3A0x5b7c16358febc8d9!2z0JzQsNGA0YHQtdC70Yw!5e0!3m2!1sru!2skz!4v1752548950159!5m2!1sru!2skz"
+                style={{ width: '100%', height: '100%', border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              ></iframe>
+            </div>
+        </div>
+      </FadeInOnScroll>
       <CountdownBlock />
       <SurveyForm />
       <FinalBlock />
