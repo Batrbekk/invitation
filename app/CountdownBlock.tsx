@@ -42,16 +42,16 @@ export default function CountdownBlock() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/10 z-10" />
       {/* Контент */}
       <div className="relative z-20 w-full flex flex-col items-center pb-16">
-        <div className="text-white text-3xl md:text-4xl font-snell mb-6 text-center drop-shadow">До свадьбы осталось:</div>
+        <div className="text-white text-3xl md:text-4xl font-snell mb-6 text-center drop-shadow">Үйлену тойына дейін:</div>
         <div className="flex gap-6 md:gap-10 text-white text-center">
           <div>
             <div className="text-4xl md:text-5xl font-bold font-snell">{time.days}</div>
-            <div className="text-base md:text-lg font-snell mt-1">дней</div>
+            <div className="text-base md:text-lg font-snell mt-1">күн</div>
           </div>
           <span className="text-4xl md:text-5xl font-bold font-snell">:</span>
           <div>
             <div className="text-4xl md:text-5xl font-bold font-snell">{String(time.hours).padStart(2, '0')}</div>
-            <div className="text-base md:text-lg font-snell mt-1">часов</div>
+            <div className="text-base md:text-lg font-snell mt-1">сағат</div>
           </div>
           <span className="text-4xl md:text-5xl font-bold font-snell">:</span>
           <div>

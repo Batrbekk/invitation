@@ -24,11 +24,10 @@ export default function Home() {
 
   return (
     <main className="bg-[#f9f9f9] overflow-x-hidden">
-      <div className="h-dvh relative">
+      <div className="h-dvh relative" onClick={handleMusic}>
         <audio ref={audioRef} src="/alem.mp3" preload="auto" />
         <Image src="/images/hero.png" alt="background" fill className="object-cover" />
         <button
-          onClick={handleMusic}
           className="absolute left-[72%] top-[54%] z-20 bg-transparent p-2 rounded-full hover:bg-white/20 transition"
           aria-label={playing ? "Остановить музыку" : "Включить музыку"}
           type="button"
@@ -88,7 +87,7 @@ export default function Home() {
             Құрметті қонақтар!
           </h1>
           <p className="text-black mt-6 text-center font-snell">
-            Мы рады сообщить , что в нашей жизни состоится самое главное и торжественное событие - день свадьбы наших детей! 
+            Сіздерді Батырбек ұлымыз бен Гузель келіңіміздің тойына арналған салтанатты ақ дастархандарымыздың қадірлі қонағы болуға шақырамыз!
           </p>
         </div>
         <div className="relative w-[110%] h-[90px] -ml-5 mt-6">

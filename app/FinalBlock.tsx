@@ -18,7 +18,7 @@ const FinalBlock: React.FC = () => (
         Сіздерді қуанышымызға ортақтасуға шақырамыз!
       </p>
       <div className="text-3xl text-white text-center font-snell mb-2">Құрметпен</div>
-      <div className="text-3xl text-white text-center font-snell mb-8">Ерқанат және Бақытгүл!</div>
+      <div className="text-3xl text-white text-center font-snell mb-8">Ерқанат - Бақытгүл!</div>
       <div className="w-24 h-0.5 bg-white mt-4 rounded-full" />
     </div>
   </div>
