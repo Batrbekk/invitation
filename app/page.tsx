@@ -152,7 +152,7 @@ export default function Home() {
             <h1 className="text-3xl text-black font-snell">
               Құрметті қонақтар!
             </h1>
-            <p className="text-black mt-6 text-center font-snell">
+            <p className="text-black mt-6 text-center font-snell text-xl">
               Сіздерді ұлымыз Батырбек пен келініміз Гузельдің тойына арналған салтанатты ақ дастархандарымыздың қадірлі қонағы болуға шақырамыз!
             </p>
           </div>

@@ -25,6 +25,7 @@ export default function FadeInOnScroll({ children, delay = 0.1, y = 40 }: FadeIn
       initial={{ opacity: 0, y }}
       animate={controls}
       style={{ willChange: 'opacity, transform' }}
+      className="w-full"
     >
       {children}
     </motion.div>

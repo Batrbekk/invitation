@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import FadeInOnScroll from "./FadeInOnScroll";
 
-const WEDDING_DATE = new Date("2025-10-17T18:00:00+06:00");
+const WEDDING_DATE = new Date("2025-10-17T16:00:00+06:00");
 
 function getTimeLeft() {
   const now = new Date();

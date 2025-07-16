@@ -29,7 +29,7 @@ export default function CalendarBlock() {
           </div>
           <div className="flex items-center w-full justify-between max-w-2xl mx-auto mt-2">
             <div className="flex-1 border-t border-black mr-2" />
-            <span className="text-xl text-black font-snell">18:00</span>
+            <span className="text-xl text-black font-snell">16:00</span>
             <div className="flex-1 border-t border-black ml-2" />
           </div>
         </div>

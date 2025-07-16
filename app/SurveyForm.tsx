@@ -117,7 +117,7 @@ const SurveyForm: React.FC = () => {
             disabled={submitted || loading}
           />
           <div className="flex flex-col gap-4 w-full max-w-md mb-8">
-            <label className="flex items-center text-lg text-black font-snell">
+            <label className="flex items-center text-xl text-black font-snell">
               <input
                 type="radio"
                 name="attendance"
@@ -136,7 +136,7 @@ const SurveyForm: React.FC = () => {
               />
               Қуана-қуана келемін!
             </label>
-            <label className="flex items-center text-lg text-black font-snell">
+            <label className="flex items-center text-xl text-black font-snell">
               <input
                 type="radio"
                 name="attendance"
@@ -154,7 +154,7 @@ const SurveyForm: React.FC = () => {
               />
               Отбасыммен келемін
             </label>
-            <label className="flex items-center text-lg text-black font-snell">
+            <label className="flex items-center text-xl text-black font-snell">
               <input
                 type="radio"
                 name="attendance"
